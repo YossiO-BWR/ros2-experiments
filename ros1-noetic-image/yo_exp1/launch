@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="data_size" default="31457280"/>
+    <arg name="hz" default="10.0"/>
+    <arg name="pubs_count" default="10"/>
+    <arg name="queue_size" default="10"/>
+
+    <node pkg="yo_exp1" type="node" name="node" output="screen">
+        <param name="data_size" value="$(arg data_size)"/>
+        <param name="hz" value="$(arg hz)"/>
+        <param name="pubs_count" value="$(arg pubs_count)"/>
+        <param name="queue_size" value="$(arg queue_size)"/>
+    </node>
+</launch>
