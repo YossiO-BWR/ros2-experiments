@@ -58,13 +58,33 @@ def generate_launch_description():
         [
             Node(
                 package="yo_exp2",
-                executable="node_2",
-                name="node_2",
+                executable="comp_pub_node",
+                name="talker",
                 parameters=[
-                    {"pubs_count": 10, "queue_size": 10, "hz": 10.0, "data_size": 31457280}
+                    {
+                        "pubs_count": 10,
+                        "queue_size": 10,
+                        "hz": 10.0,
+                        "data_size": 31457280,
+                        "best_effort": False,
+                    }
                 ],
                 emulate_tty=True,
                 output="screen",
             ),
-        ]
+            Node(
+                package="yo_exp2",
+                executable="comp_sub_node",
+                name="listener",
+                parameters=[
+                    {
+                        "pubs_count": 2,
+                        "queue_size": 1,
+                        "best_effort": False,
+                    }
+                ],
+                emulate_tty=True,
+                output="screen",
+            ),
+        ],
     )

@@ -37,7 +37,6 @@ private:
     void timerCallback(const ros::TimerEvent&) {
             for (const auto &pub : publishers_) {
                 pub.publish(msg_);
-
         }
     }
 

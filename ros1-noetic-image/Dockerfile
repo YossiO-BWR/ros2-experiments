@@ -17,10 +17,10 @@ WORKDIR /ws/src
 COPY yo_exp1 /ws/src/yo_exp1
 
 WORKDIR /ws/
+RUN catkin config --install --merge-install
 RUN catkin build --summary --no-status --continue-on-failure
-RUN echo "source /ws/devel/setup.bash" >> /etc/bash.bashrc
 RUN echo "source /ws/devel/setup.bash" >> ~/.bashrc
 RUN echo "alias launch='roslaunch /ws/src/yo_exp1/launch'" >> ~/.bashrc
-RUN echo "alias bw='rostopic bw -w10 /node/topic_000'" >> ~/.bashrc
+RUN echo "alias bw='rostopic bw -w10 /node_1/topic_000'" >> ~/.bashrc
 
 CMD ["roscore"]

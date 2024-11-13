@@ -19,20 +19,55 @@ endif ()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
-add_executable(node_2 src/node_2.cpp)
-ament_target_dependencies(node_2
+add_library(composable_pub SHARED
+        src/ComposablePub.cpp
+)
+ament_target_dependencies(composable_pub
         rclcpp
+        rclcpp_components
         std_msgs
 )
 
-install(TARGETS node_2
-        DESTINATION lib/${PROJECT_NAME})
+add_library(composable_sub SHARED
+        src/ComposableSub.cpp
+)
+ament_target_dependencies(composable_sub
+        rclcpp
+        rclcpp_components
+        std_msgs
+)
 
-ament_package()
 
 install(DIRECTORY
         launch
         DESTINATION share/${PROJECT_NAME}
 )
 
+install(TARGETS composable_pub
+        EXPORT export_composable_pub
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+)
+install(TARGETS composable_sub
+        EXPORT export_composable_sub
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+)
+
+rclcpp_components_register_node(
+        composable_pub
+        PLUGIN "yo_exp2::ComposablePub"
+        EXECUTABLE comp_pub_node
+)
+
+rclcpp_components_register_node(
+        composable_sub
+        PLUGIN "yo_exp2::ComposableSub"
+        EXECUTABLE comp_sub_node
+)
+
+ament_package()

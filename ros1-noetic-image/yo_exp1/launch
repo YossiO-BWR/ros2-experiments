@@ -5,7 +5,7 @@
     <arg name="pubs_count" default="10"/>
     <arg name="queue_size" default="10"/>
 
-    <node pkg="yo_exp1" type="node" name="node" output="screen">
+    <node pkg="yo_exp1" type="node_1" name="node_1" output="screen">
         <param name="data_size" value="$(arg data_size)"/>
         <param name="hz" value="$(arg hz)"/>
         <param name="pubs_count" value="$(arg pubs_count)"/>
